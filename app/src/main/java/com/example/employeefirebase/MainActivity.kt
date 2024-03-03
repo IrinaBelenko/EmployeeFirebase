@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity(), OnAuthLaunch, onAddClickListener {
 
     override fun showListFragment() {
         supportFragmentManager.beginTransaction()
-            .add(R.id.container, EmployeeListFragment())
+            .add(R.id.container, TodoListFragment())
             .commit()
     }
 
@@ -55,18 +55,12 @@ class MainActivity : AppCompatActivity(), OnAuthLaunch, onAddClickListener {
 
     override fun onFabClick() {
         supportFragmentManager.beginTransaction()
-            .add(R.id.container, AddEmployeeFragment())
-            .addToBackStack("employeeFragment")
+            .add(R.id.container, AddTodoFragment())
+            .addToBackStack("todoFragment")
             .commit()
     }
 
 }
 
-interface OnAuthLaunch {
-    fun launch(intent: Intent)
-    fun showListFragment()
-}
 
-interface onAddClickListener{
-    fun onFabClick()
-}
+

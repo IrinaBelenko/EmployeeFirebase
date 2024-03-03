@@ -11,14 +11,14 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.firebase.database.FirebaseDatabase
 import java.util.UUID
 
-class AddEmployeeFragment : Fragment() {
+class AddTodoFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.add_employee_fragment, container, false)
+        return inflater.inflate(R.layout.add_todo_fragment, container, false)
     }
 
     override fun onViewCreated(
@@ -26,7 +26,7 @@ class AddEmployeeFragment : Fragment() {
         Bundle?
     ) {
         super.onViewCreated(view, savedInstanceState)
-        val inputField: EditText = view.findViewById(R.id.employeeName)
+        val inputField: EditText = view.findViewById(R.id.todo)
         val button: Button = view.findViewById(R.id.addButton)
         val database = FirebaseDatabase.getInstance(
             "https://employeelist-f6d95-default-rtdb.europe-west1.firebasedatabase.app/"
@@ -37,8 +37,9 @@ class AddEmployeeFragment : Fragment() {
             val target = database.reference.child(
                 account?.id ?: "unknown_account"
             )
-                .child("employees")
+                .child("todo")
                 .child(UUID.randomUUID().toString())
+
             target.setValue(
                 inputField.text.toString()
             ).addOnCompleteListener {

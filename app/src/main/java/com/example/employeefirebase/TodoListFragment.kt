@@ -5,9 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.Button
 import android.widget.ListView
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -18,7 +16,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
-class EmployeeListFragment : Fragment() {
+class TodoListFragment : Fragment() {
 
     private var list: ListView? = null
     private var account: GoogleSignInAccount? = null
@@ -33,7 +31,7 @@ class EmployeeListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(
-            R.layout.employee_list_fragment, container,
+            R.layout.todo_list_fragment, container,
             false
         )
     }
@@ -44,7 +42,7 @@ class EmployeeListFragment : Fragment() {
         list = view.findViewById(R.id.employeeList)
         account = GoogleSignIn.getLastSignedInAccount(requireContext())
         target = database.reference
-            .child(account?.id ?: "unknown_account").child("employees")
+            .child(account?.id ?: "unknown_account").child("todo")
         fab.setOnClickListener {
             val activity = requireActivity() as onAddClickListener
             activity.onFabClick()
@@ -52,15 +50,15 @@ class EmployeeListFragment : Fragment() {
 
         target?.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                val employeeList = mutableListOf<String>()
+                val todoList = mutableListOf<String>()
                 if (snapshot.exists()) {
                     snapshot.children.forEach {
                         val employee = it?.getValue(String::class.java) ?: ""
-                        employeeList.add(employee)
+                        todoList.add(employee)
                     }
                     val adapter = ArrayAdapter(
                         requireActivity(),
-                        android.R.layout.simple_list_item_1, employeeList
+                        android.R.layout.simple_list_item_1, todoList
                     )
                     list?.adapter = adapter
                 }

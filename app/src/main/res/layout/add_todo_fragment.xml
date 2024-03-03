@@ -8,8 +8,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <EditText
-        android:id="@+id/employeeName"
-        android:hint="Імʼя працівника"
+        android:id="@+id/todo"
+        android:hint="опишіть ваше завдання"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <Button
